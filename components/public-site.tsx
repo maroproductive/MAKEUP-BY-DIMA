@@ -253,26 +253,19 @@ export function PublicSite({
           </div>
           <div className="hero-copy">
             <p className="eyebrow">
-              <span /> MAKEUP ARTIST &middot; BEAUTY &middot; BRIDAL
+              <span /> {t.heroEyebrow}
             </p>
             <h1>
-              {s.heroHeadline === "Your beauty,\nbeautifully enhanced." ||
-              !s.heroHeadline ? (
-                <>
-                  Beauty,
-                  <br />
-                  <span>Defined by You.</span>
-                </>
-              ) : (
-                s.heroHeadline
-                  .split("\n")
-                  .map((line, i) => <span key={i}>{line}</span>)
-              )}
+              {(lang === "ar" && s.heroHeadlineAr
+                ? s.heroHeadlineAr
+                : s.heroHeadline
+              )
+                .split("\n")
+                .map((line, i) => <span key={i}>{line}</span>)}
             </h1>
             <p className="hero-description">
-              {s.heroDescription ===
-              "From the softest glow to your most unforgettable day. Makeup that feels like you, with a little extra magic."
-                ? "Soft glam, bridal looks, and timeless makeup tailored to you."
+              {lang === "ar" && s.heroDescriptionAr
+                ? s.heroDescriptionAr
                 : s.heroDescription}
             </p>
             <div className="hero-actions">
@@ -280,49 +273,43 @@ export function PublicSite({
                 className="button"
                 href={packages.length ? "#packages" : "#contact"}
               >
-                {packages.length ? "Explore Packages" : "Find Your Look"}{" "}
+                {packages.length ? t.explorePackages : t.findYourLook}{" "}
                 <ArrowUpRight size={18} />
               </a>
               {s.whatsapp && (
                 <a
                   className="button button-outline"
-                  href={whatsappLink(s.whatsapp)!}
+                  href={whatsappLink(s.whatsapp, undefined, undefined, lang)!}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <MessageCircle size={17} /> Book on WhatsApp
+                  <MessageCircle size={17} /> {t.bookWhatsapp}
                 </a>
               )}
             </div>
             <div className="hero-signature">
               <span className="signature-line" />
-              <span>YOUR FEATURES. YOUR STYLE. YOUR MOMENT.</span>
+              <span>{t.signature}</span>
             </div>
           </div>
         </section>
         <div className="signature-strip">
-          <span>SOFT GLAM</span>
+          <span>{t.softGlam}</span>
           <i>&#10023;</i>
-          <span>EFFORTLESS BEAUTY</span>
+          <span>{t.effortlessBeauty}</span>
           <i>&#10023;</i>
-          <span>BRIDAL ARTISTRY</span>
+          <span>{t.bridalArtistry}</span>
           <i>&#10023;</i>
-          <span>UNMISTAKABLY YOU</span>
+          <span>{t.unmistakablyYou}</span>
         </div>
         {packages.length > 0 && (
           <section id="packages" className="section packages-section">
             <div className="section-heading">
               <div>
-                <p className="eyebrow">THE MAKEUP MENU</p>
-                <h2>
-                  A look for <em>every occasion.</em>
-                </h2>
+                <p className="eyebrow">{t.menuEyebrow}</p>
+                <h2>{t.menuTitle}</h2>
               </div>
-              <p>
-                Thoughtful details. Beautiful finishes.
-                <br />
-                Find the look that feels like you.
-              </p>
+              <p>{t.menuText}</p>
             </div>
             <div className="package-grid">
               {packages.map((p, i) => (
@@ -331,7 +318,7 @@ export function PublicSite({
                   key={p._id}
                 >
                   {i === 3 && (
-                    <span className="card-ribbon">YOUR MOST SPECIAL DAY</span>
+                    <span className="card-ribbon">{t.specialDay}</span>
                   )}
                   <div className="package-top">
                     <span className="package-index">0{i + 1}</span>
@@ -355,13 +342,13 @@ export function PublicSite({
                         dialog.current?.showModal();
                       }}
                     >
-                      {p.name}
+                      {localized(p, "name", lang)}
                     </button>
                   </h3>
-                  <p>{p.description}</p>
+                  <p>{localized(p, "description", lang)}</p>
                   <div className="price">
                     ${p.price}
-                    <span> / session</span>
+                    <span> {t.session}</span>
                   </div>
                   <button
                     className="package-details"
@@ -370,21 +357,22 @@ export function PublicSite({
                       dialog.current?.showModal();
                     }}
                   >
-                    View Details <ArrowUpRight size={17} />
+                    {t.viewDetails} <ArrowUpRight size={17} />
                   </button>
                   <Booking
                     number={s.whatsapp}
-                    name={String(p.name)}
+                    name={localized(p, "name", lang)}
                     price={String(p.price)}
+                    language={lang}
                     light={i === 3}
                   />
                 </article>
               ))}
             </div>
             <p className="package-footnote">
-              A little unsure which look is yours?{" "}
-              <a href={whatsappLink(s.whatsapp) || "#contact"}>
-                Let’s find it together <ArrowUpRight size={13} />
+              {t.unsure}{" "}
+              <a href={whatsappLink(s.whatsapp, undefined, undefined, lang) || "#contact"}>
+                {t.findTogether} <ArrowUpRight size={13} />
               </a>
             </p>
           </section>
@@ -393,10 +381,8 @@ export function PublicSite({
           <section id="portfolio" className="section portfolio-section">
             <div className="section-heading">
               <div>
-                <p className="eyebrow">A CLOSER LOOK</p>
-                <h2>
-                  Beauty in <em>the details.</em>
-                </h2>
+                <p className="eyebrow">{t.closerLook}</p>
+                <h2>{t.beautyDetails}</h2>
               </div>
               {s.instagramUrl && (
                 <a
@@ -405,7 +391,7 @@ export function PublicSite({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Instagram size={17} /> Follow the artistry{" "}
+                  <Instagram size={17} /> {t.followArtistry}{" "}
                   <ArrowUpRight size={15} />
                 </a>
               )}
@@ -420,7 +406,7 @@ export function PublicSite({
                     aria-pressed={category === c}
                     onClick={() => setCategory(c)}
                   >
-                    {c}
+                    {categoryLabel(c)}
                   </button>
                 ))}
               </div>
@@ -438,16 +424,16 @@ export function PublicSite({
                     >
                       <Image
                         src={String(p.image)}
-                        alt={String(p.title)}
+                        alt={localized(p, "title", lang)}
                         fill
                         sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw"
                       />
                       <span>
                         <span>
                           <small className="gallery-category">
-                            {p.category}
+                            {localized(p, "category", lang) || String(p.category)}
                           </small>
-                          {p.title}
+                          {localized(p, "title", lang)}
                         </span>
                         <ArrowUpRight size={18} />
                       </span>
@@ -461,26 +447,22 @@ export function PublicSite({
           <section className="section before-section" id="before-after">
             <div className="section-heading">
               <div>
-                <p className="eyebrow">THE FINISHING TOUCH</p>
-                <h2>
-                  A little artistry.<em> A beautiful difference.</em>
-                </h2>
+                <p className="eyebrow">{t.finishingTouch}</p>
+                <h2>{t.beforeTitle}</h2>
               </div>
-              <p>Slide to discover the transformation.</p>
+              <p>{t.slideDiscover}</p>
             </div>
             <div className="comparison-grid">
               {beforeAfter.map((item) => (
-                <Comparison item={item} key={item._id} />
+                <Comparison item={item} lang={lang} key={item._id} />
               ))}
             </div>
           </section>
         )}
         {testimonials.length > 0 && (
           <section className="section testimonials">
-            <p className="eyebrow">LOVE NOTES</p>
-            <h2>
-              Beautiful looks. <em>Even better feelings.</em>
-            </h2>
+            <p className="eyebrow">{t.loveNotes}</p>
+            <h2>{t.testimonialTitle}</h2>
             <div className="testimonial-grid">
               {testimonials.map((t) => (
                 <article key={t._id}>
@@ -494,17 +476,17 @@ export function PublicSite({
                       ))}
                     </div>
                   )}
-                  <blockquote>“{t.review}”</blockquote>
+                  <blockquote>“{localized(t, "review", lang)}”</blockquote>
                   <div className="review-author">
                     {t.image && (
                       <Image
                         src={String(t.image)}
-                        alt={String(t.name)}
+                        alt={localized(t, "name", lang)}
                         width={40}
                         height={40}
                       />
                     )}
-                    <span>{t.name}</span>
+                    <span>{localized(t, "name", lang)}</span>
                   </div>
                 </article>
               ))}
@@ -514,22 +496,18 @@ export function PublicSite({
         {faqs.length > 0 && (
           <section className="section faq-section" id="faq">
             <div>
-              <p className="eyebrow">A FEW LITTLE DETAILS</p>
-              <h2>
-                Before your
-                <br />
-                <em>beauty moment.</em>
-              </h2>
+              <p className="eyebrow">{t.fewDetails}</p>
+              <h2>{t.faqTitle}</h2>
             </div>
             <div className="faqs">
               {faqs.map((f) => (
                 <details key={f._id}>
                   <summary>
-                    {f.question}
+                    {localized(f, "question", lang)}
                     <Plus size={18} className="plus" />
                     <Minus size={18} className="minus" />
                   </summary>
-                  <p>{f.answer}</p>
+                  <p>{localized(f, "answer", lang)}</p>
                 </details>
               ))}
             </div>
@@ -537,16 +515,10 @@ export function PublicSite({
         )}
         <section id="contact" className="contact-section">
           <span className="contact-sparkle">✧</span>
-          <p className="eyebrow">LET’S MAKE IT YOUR MOMENT</p>
-          <h2>
-            Ready for <em>your look?</em>
-          </h2>
-          <p>
-            A special occasion or a little just-because glam.
-            <br />
-            I’d love to create something beautiful with you.
-          </p>
-          {s.whatsapp && <Booking number={s.whatsapp} />}
+          <p className="eyebrow">{t.contactEyebrow}</p>
+          <h2>{t.ready}</h2>
+          <p>{t.contactText}</p>
+          {s.whatsapp && <Booking number={s.whatsapp} language={lang} />}
           <div className="contact-links">
             {social.map(({ label, url, Icon }) => (
               <a
@@ -567,11 +539,11 @@ export function PublicSite({
         <a
           href="#"
           className="footer-brand-logo"
-          aria-label={`${s.businessName} home`}
+          aria-label={`${displayBusinessName} home`}
         >
           <Image
             src="/makeup-by-dima-logo.svg"
-            alt={`${s.businessName} logo`}
+            alt={`${displayBusinessName} logo`}
             width={130}
             height={123}
             unoptimized
@@ -580,7 +552,7 @@ export function PublicSite({
         <div className="footer-social">
           {social.map(({ label, url }) => (
             <a href={url} key={label} target="_blank" rel="noopener noreferrer">
-              {label === "Get Directions" ? "Location" : label}
+              {label}
             </a>
           ))}
         </div>
@@ -596,7 +568,7 @@ export function PublicSite({
         </p>
       </footer>
       <dialog
-        aria-label="Package details"
+        aria-label={t.closePackage}
         ref={dialog}
         className="package-dialog"
         onClick={(e) => {
@@ -605,20 +577,20 @@ export function PublicSite({
       >
         <button
           className="dialog-close"
-          aria-label="Close package details"
+          aria-label={t.closePackage}
           onClick={() => dialog.current?.close()}
         >
           <X />
         </button>
         {selected && (
           <>
-            <p className="eyebrow">YOUR BEAUTY MOMENT</p>
-            <h2>{selected.name}</h2>
+            <p className="eyebrow">{t.beautyMoment}</p>
+            <h2>{localized(selected, "name", lang)}</h2>
             <p className="dialog-price">${selected.price}</p>
-            <p>{selected.details}</p>
-            {Array.isArray(selected.included) && (
+            <p>{localized(selected, "details", lang)}</p>
+            {localizedList(selected, "included", lang).length > 0 && (
               <ul>
-                {selected.included.map((x) => (
+                {localizedList(selected, "included", lang).map((x) => (
                   <li key={x}>
                     <Check size={16} />
                     {x}
@@ -628,14 +600,15 @@ export function PublicSite({
             )}
             <Booking
               number={s.whatsapp}
-              name={String(selected.name)}
+              name={localized(selected, "name", lang)}
               price={String(selected.price)}
+              language={lang}
             />
           </>
         )}
       </dialog>
       <dialog
-        aria-label="Portfolio image"
+        aria-label={t.closeImage}
         ref={lightbox}
         className="lightbox"
         onClick={(e) => {
@@ -644,7 +617,7 @@ export function PublicSite({
       >
         <button
           className="dialog-close"
-          aria-label="Close image"
+          aria-label={t.closeImage}
           onClick={() => lightbox.current?.close()}
         >
           <X />
@@ -654,12 +627,12 @@ export function PublicSite({
             <div className="lightbox-image">
               <Image
                 src={String(galleryImage.image)}
-                alt={String(galleryImage.title)}
+                alt={localized(galleryImage, "title", lang)}
                 fill
                 sizes="90vw"
               />
             </div>
-            <p>{galleryImage.title}</p>
+            <p>{localized(galleryImage, "title", lang)}</p>
           </>
         )}
       </dialog>
