@@ -1680,13 +1680,13 @@ label small {
   padding: 20px;
 }
 .hero-brand-logo {
-  width: min(100%, 470px);
-  padding: 18px;
-  border: 1px solid #aa8b5338;
-  border-radius: 34px;
-  background: #fefbf4d9;
-  box-shadow: 0 24px 65px #80652a18;
-  backdrop-filter: blur(8px);
+  width: min(100%, 270px);
+  padding: 12px;
+  border: 1px solid #aa8b5330;
+  border-radius: 24px;
+  background: #fefbf4b8;
+  box-shadow: 0 16px 42px #80652a12;
+  backdrop-filter: blur(6px);
 }
 .hero-brand-logo img {
   display: block;
@@ -2316,9 +2316,9 @@ label small {
     display: none;
   }
   .public-site .hero-brand-logo {
-    width: min(100%, 360px);
-    padding: 12px;
-    border-radius: 26px;
+    width: min(100%, 210px);
+    padding: 10px;
+    border-radius: 20px;
   }
   .public-site .footer-brand-logo img {
     width: 120px;
