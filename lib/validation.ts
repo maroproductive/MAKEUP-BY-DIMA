@@ -86,7 +86,10 @@ export type ContentItem = {
   active: boolean;
   [key: string]: string | number | boolean | string[];
 };
-export function whatsappLink(number: string, name?: string) {
+export function whatsappLink(number: string, name?: string, price?: number | string) {
   if (!number) return null;
-  return `https://wa.me/${number.replace(/\D/g, "")}?text=${encodeURIComponent(name ? `Hello, I’m interested in the ${name} package. I would like to know more and book an appointment.` : "Hello, I would like to know more and book a makeup appointment.")}`;
+  const packageMessage = name
+    ? `Hello, I’m interested in the ${name} package${price !== undefined && price !== "" ? ` (${price})` : ""}. I would like to know more and book an appointment.`
+    : "Hello, I would like to know more and book a makeup appointment.";
+  return `https://wa.me/${number.replace(/\D/g, "")}?text=${encodeURIComponent(packageMessage)}`;
 }
