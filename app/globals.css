@@ -2337,3 +2337,5 @@ label small {
     padding-inline: 10px;
   }
 }
+
+.public-site .language-toggle { min-width: 64px; }
