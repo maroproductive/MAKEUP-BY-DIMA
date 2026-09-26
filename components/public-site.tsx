@@ -265,8 +265,8 @@ export function PublicSite({
               <Image
                 src="/makeup-by-dima-logo.svg"
                 alt={`${s.businessName} logo`}
-                width={520}
-                height={492}
+                width={280}
+                height={265}
                 priority
                 unoptimized
               />
