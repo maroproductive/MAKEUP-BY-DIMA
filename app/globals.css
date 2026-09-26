@@ -2339,3 +2339,24 @@ label small {
 }
 
 .public-site .language-toggle { min-width: 64px; }
+
+.public-site .language-toggle {
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid #baa47760;
+  border-radius: 999px;
+  background: #fffdf777;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.public-site[dir="rtl"] {
+  font-family: Tahoma, Arial, sans-serif;
+}
+.public-site[dir="rtl"] .hero h1,
+.public-site[dir="rtl"] h2,
+.public-site[dir="rtl"] h3 {
+  letter-spacing: 0;
+  line-height: 1.25;
+}
