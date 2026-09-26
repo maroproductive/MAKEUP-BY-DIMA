@@ -17,7 +17,10 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: "Dima Makeup",
   },
-  icons: { icon: "/icon.png", apple: "/apple-icon.png" },
+  icons: {
+    icon: "/makeup-by-dima-mark.svg",
+    apple: "/makeup-by-dima-mark.svg",
+  },
   openGraph: {
     type: "website",
     siteName: "Makeup by Dima",
