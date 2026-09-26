@@ -2360,3 +2360,42 @@ label small {
   letter-spacing: 0;
   line-height: 1.25;
 }
+
+.public-site[dir="rtl"] .eyebrow,
+.public-site[dir="rtl"] .hero-signature,
+.public-site[dir="rtl"] .signature-strip,
+.public-site[dir="rtl"] .card-ribbon,
+.public-site[dir="rtl"] .package-index,
+.public-site[dir="rtl"] .brand-logo-copy small {
+  letter-spacing: 0;
+}
+.public-site[dir="rtl"] .hero-copy,
+.public-site[dir="rtl"] .package-card,
+.public-site[dir="rtl"] .faqs,
+.public-site[dir="rtl"] .contact-section,
+.public-site[dir="rtl"] .package-dialog {
+  text-align: right;
+}
+.public-site[dir="rtl"] .hero-description {
+  line-height: 2;
+}
+@media (max-width: 800px) {
+  .public-site .language-toggle {
+    min-width: 48px;
+    height: 44px;
+    padding: 0 10px;
+    font-size: 10px;
+  }
+}
+@media (max-width: 580px) {
+  .public-site .header-book {
+    display: none;
+  }
+  .public-site .language-toggle {
+    margin-left: auto;
+  }
+  .public-site[dir="rtl"] .language-toggle {
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
