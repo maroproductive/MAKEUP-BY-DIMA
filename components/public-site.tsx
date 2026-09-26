@@ -128,9 +128,31 @@ export function PublicSite({
   const [menu, setMenu] = useState(false),
     [category, setCategory] = useState("All"),
     [selected, setSelected] = useState<ContentItem | null>(null),
-    [galleryImage, setGalleryImage] = useState<ContentItem | null>(null);
+    [galleryImage, setGalleryImage] = useState<ContentItem | null>(null),
+    [lang, setLang] = useState<Lang>("en"),
+    [languageReady, setLanguageReady] = useState(false);
+  const t = ui[lang];
+  const displayBusinessName =
+    lang === "ar" && s.businessNameAr ? s.businessNameAr : s.businessName;
   const dialog = useRef<HTMLDialogElement>(null),
     lightbox = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    const saved = window.localStorage.getItem("makeup-by-dima-language");
+    const preferred: Lang =
+      saved === "ar" || saved === "en"
+        ? saved
+        : navigator.language.toLowerCase().startsWith("ar")
+          ? "ar"
+          : "en";
+    setLang(preferred);
+    setLanguageReady(true);
+  }, []);
+  useEffect(() => {
+    if (!languageReady) return;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    window.localStorage.setItem("makeup-by-dima-language", lang);
+  }, [lang, languageReady]);
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -152,19 +174,24 @@ export function PublicSite({
     "All",
     ...new Set(portfolio.map((p) => String(p.category)).filter(Boolean)),
   ];
+  const categoryLabel = (value: string) => {
+    if (value === "All") return t.all;
+    const match = portfolio.find((p) => String(p.category) === value);
+    return match ? localized(match, "category", lang) || value : value;
+  };
   const social = [
-    { label: "Instagram", url: s.instagramUrl, Icon: Instagram },
+    { label: t.instagram, url: s.instagramUrl, Icon: Instagram },
     {
-      label: "WhatsApp",
-      url: whatsappLink(s.whatsapp) || "",
+      label: t.whatsapp,
+      url: whatsappLink(s.whatsapp, undefined, undefined, lang) || "",
       Icon: MessageCircle,
     },
-    { label: "Get Directions", url: s.mapsUrl, Icon: MapPin },
+    { label: t.directions, url: s.mapsUrl, Icon: MapPin },
   ].filter((x) => x.url);
   return (
-    <div className="public-site">
+    <div className="public-site" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
       <header className="site-header">
-        <a className="brand-logo-link" href="#" aria-label={`${s.businessName} home`}>
+        <a className="brand-logo-link" href="#" aria-label={`${displayBusinessName} home`}>
           <Image
             src="/makeup-by-dima-mark.svg"
             alt=""
@@ -174,8 +201,8 @@ export function PublicSite({
             unoptimized
           />
           <span className="brand-logo-copy">
-            <strong>{s.businessName}</strong>
-            <small>MAKEUP ARTISTRY</small>
+            <strong>{displayBusinessName}</strong>
+            <small>{t.makeupArtistry}</small>
           </span>
         </a>
         <nav
@@ -183,25 +210,31 @@ export function PublicSite({
           aria-label="Main navigation"
         >
           {[
-            ...(packages.length ? [["Packages", "#packages"]] : []),
-            ...(portfolio.length ? [["Portfolio", "#portfolio"]] : []),
-            ...(beforeAfter.length
-              ? [["Before & After", "#before-after"]]
-              : []),
-            ...(faqs.length ? [["FAQ", "#faq"]] : []),
-            ["Contact", "#contact"],
+            ...(packages.length ? [[t.packages, "#packages"]] : []),
+            ...(portfolio.length ? [[t.portfolio, "#portfolio"]] : []),
+            ...(beforeAfter.length ? [[t.beforeAfter, "#before-after"]] : []),
+            ...(faqs.length ? [[t.faq, "#faq"]] : []),
+            [t.contact, "#contact"],
           ].map(([label, href]) => (
             <a key={href} href={href} onClick={() => setMenu(false)}>
-              {label === "Get Directions" ? "Location" : label}
+              {label}
             </a>
           ))}
         </nav>
         <a
-          href={whatsappLink(s.whatsapp) || "#contact"}
+          href={whatsappLink(s.whatsapp, undefined, undefined, lang) || "#contact"}
           className="header-book"
         >
-          Book Now <ArrowUpRight size={15} />
+          {t.bookNow} <ArrowUpRight size={15} />
         </a>
+        <button
+          className="language-toggle"
+          type="button"
+          aria-label={lang === "en" ? "Switch to Arabic" : "Switch to English"}
+          onClick={() => setLang(lang === "en" ? "ar" : "en")}
+        >
+          {lang === "en" ? "العربية" : "EN"}
+        </button>
         <button
           className="menu-toggle"
           aria-label="Toggle menu"
