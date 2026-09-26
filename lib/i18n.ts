@@ -1,0 +1,123 @@
+import type { ContentItem } from "./validation";
+
+export type Lang = "en" | "ar";
+
+export const ui = {
+  en: {
+    makeupArtistry: "MAKEUP ARTISTRY",
+    packages: "Packages",
+    portfolio: "Portfolio",
+    beforeAfter: "Before & After",
+    faq: "FAQ",
+    contact: "Contact",
+    bookNow: "Book Now",
+    heroEyebrow: "MAKEUP ARTIST · BEAUTY · BRIDAL",
+    explorePackages: "Explore Packages",
+    findYourLook: "Find Your Look",
+    bookWhatsapp: "Book on WhatsApp",
+    signature: "YOUR FEATURES. YOUR STYLE. YOUR MOMENT.",
+    softGlam: "SOFT GLAM",
+    effortlessBeauty: "EFFORTLESS BEAUTY",
+    bridalArtistry: "BRIDAL ARTISTRY",
+    unmistakablyYou: "UNMISTAKABLY YOU",
+    menuEyebrow: "THE MAKEUP MENU",
+    menuTitle: "A look for every occasion.",
+    menuText: "Thoughtful details. Beautiful finishes. Find the look that feels like you.",
+    specialDay: "YOUR MOST SPECIAL DAY",
+    viewDetails: "View Details",
+    bookThisLook: "Book This Look",
+    session: "/ session",
+    unsure: "A little unsure which look is yours?",
+    findTogether: "Let’s find it together",
+    closerLook: "A CLOSER LOOK",
+    beautyDetails: "Beauty in the details.",
+    followArtistry: "Follow the artistry",
+    all: "All",
+    finishingTouch: "THE FINISHING TOUCH",
+    beforeTitle: "A little artistry. A beautiful difference.",
+    slideDiscover: "Slide to discover the transformation.",
+    before: "BEFORE",
+    after: "AFTER",
+    loveNotes: "LOVE NOTES",
+    testimonialTitle: "Beautiful looks. Even better feelings.",
+    fewDetails: "A FEW LITTLE DETAILS",
+    faqTitle: "Before your beauty moment.",
+    contactEyebrow: "LET’S MAKE IT YOUR MOMENT",
+    ready: "Ready for your look?",
+    contactText: "A special occasion or a little just-because glam. I’d love to create something beautiful with you.",
+    instagram: "Instagram",
+    whatsapp: "WhatsApp",
+    directions: "Get Directions",
+    location: "Location",
+    beautyMoment: "YOUR BEAUTY MOMENT",
+    closePackage: "Close package details",
+    closeImage: "Close image",
+    inquiry: "Enquire about your look",
+  },
+  ar: {
+    makeupArtistry: "فن المكياج",
+    packages: "الباقات",
+    portfolio: "الأعمال",
+    beforeAfter: "قبل وبعد",
+    faq: "الأسئلة الشائعة",
+    contact: "تواصل",
+    bookNow: "احجزي الآن",
+    heroEyebrow: "خبيرة مكياج · جمال · عرائس",
+    explorePackages: "استكشفي الباقات",
+    findYourLook: "اختاري إطلالتكِ",
+    bookWhatsapp: "احجزي عبر واتساب",
+    signature: "ملامحكِ. أسلوبكِ. لحظتكِ.",
+    softGlam: "مكياج ناعم",
+    effortlessBeauty: "جمال طبيعي",
+    bridalArtistry: "مكياج عرائس",
+    unmistakablyYou: "إطلالة تشبهكِ",
+    menuEyebrow: "قائمة الإطلالات",
+    menuTitle: "إطلالة لكل مناسبة.",
+    menuText: "تفاصيل مدروسة ولمسات جميلة. اختاري الإطلالة التي تعبّر عنكِ.",
+    specialDay: "ليومكِ الأكثر تميزاً",
+    viewDetails: "عرض التفاصيل",
+    bookThisLook: "احجزي هذه الإطلالة",
+    session: "/ جلسة",
+    unsure: "لستِ متأكدة أي إطلالة تناسبكِ؟",
+    findTogether: "لنختارها معاً",
+    closerLook: "نظرة أقرب",
+    beautyDetails: "الجمال في التفاصيل.",
+    followArtistry: "تابعي أعمالنا",
+    all: "الكل",
+    finishingTouch: "اللمسة الأخيرة",
+    beforeTitle: "لمسة فنية. فرق جميل.",
+    slideDiscover: "حرّكي المؤشر لمشاهدة الفرق.",
+    before: "قبل",
+    after: "بعد",
+    loveNotes: "آراء الزبائن",
+    testimonialTitle: "إطلالات جميلة. وشعور أجمل.",
+    fewDetails: "تفاصيل مهمة",
+    faqTitle: "قبل موعد جمالكِ.",
+    contactEyebrow: "لنصنع لحظتكِ",
+    ready: "جاهزة لإطلالتكِ؟",
+    contactText: "لمناسبة خاصة أو لمسة جمال فقط. يسعدنا أن نصنع معكِ إطلالة جميلة تناسبكِ.",
+    instagram: "إنستغرام",
+    whatsapp: "واتساب",
+    directions: "الاتجاهات",
+    location: "الموقع",
+    beautyMoment: "لحظة جمالكِ",
+    closePackage: "إغلاق تفاصيل الباقة",
+    closeImage: "إغلاق الصورة",
+    inquiry: "استفسري عن إطلالتكِ",
+  },
+} as const;
+
+export function localized(item: ContentItem, key: string, lang: Lang) {
+  const arabic = item[`${key}Ar`];
+  if (lang === "ar" && typeof arabic === "string" && arabic.trim()) return arabic;
+  const value = item[key];
+  return typeof value === "string" ? value : "";
+}
+
+export function localizedList(item: ContentItem, key: string, lang: Lang) {
+  const arabic = item[`${key}Ar`];
+  if (lang === "ar" && Array.isArray(arabic) && arabic.length)
+    return arabic.map(String).filter(Boolean);
+  const value = item[key];
+  return Array.isArray(value) ? value.map(String).filter(Boolean) : [];
+}
