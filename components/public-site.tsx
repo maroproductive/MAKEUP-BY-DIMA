@@ -83,7 +83,7 @@ function Comparison({ item, lang }: { item: ContentItem; lang: Lang }) {
       <div className="comparison">
         <Image
           src={String(item.afterImage)}
-          alt={`${item.title}, after makeup`}
+          alt={`${localized(item, "title", lang)}, ${ui[lang].after}`}
           fill
           sizes="(max-width: 700px) 100vw, 50vw"
         />
@@ -93,7 +93,7 @@ function Comparison({ item, lang }: { item: ContentItem; lang: Lang }) {
         >
           <Image
             src={String(item.beforeImage)}
-            alt={`${item.title}, before makeup`}
+            alt={`${localized(item, "title", lang)}, ${ui[lang].before}`}
             fill
             sizes="(max-width: 700px) 100vw, 50vw"
           />
@@ -328,7 +328,7 @@ export function PublicSite({
                     <div className="package-image">
                       <Image
                         src={String(p.image)}
-                        alt={String(p.name)}
+                        alt={localized(p, "name", lang)}
                         fill
                         sizes="300px"
                       />
@@ -557,7 +557,7 @@ export function PublicSite({
           ))}
         </div>
         <p>
-          Made by{" "}
+          {t.madeBy}{" "}
           {s.footerUrl ? (
             <a href={s.footerUrl} target="_blank" rel="noopener noreferrer">
               Marwanweb.dev <ArrowUpRight size={11} />
