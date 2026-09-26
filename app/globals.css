@@ -114,6 +114,34 @@ p {
   letter-spacing: 3.7px;
   margin-top: 7px;
 }
+.brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.brand-logo-link > img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  border-radius: 14px;
+}
+.brand-logo-copy {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.brand-logo-copy strong {
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.7px;
+}
+.brand-logo-copy small {
+  margin-top: 7px;
+  font-size: 7px;
+  letter-spacing: 2.2px;
+}
 .navigation {
   display: flex;
   gap: 30px;
@@ -1651,6 +1679,30 @@ label small {
   position: relative;
   padding: 20px;
 }
+.hero-brand-logo {
+  width: min(100%, 470px);
+  padding: 18px;
+  border: 1px solid #aa8b5338;
+  border-radius: 34px;
+  background: #fefbf4d9;
+  box-shadow: 0 24px 65px #80652a18;
+  backdrop-filter: blur(8px);
+}
+.hero-brand-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.footer-brand-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-brand-logo img {
+  display: block;
+  width: 112px;
+  height: auto;
+}
 .brand-medallion {
   width: min(100%, 345px);
   aspect-ratio: 1;
@@ -2245,5 +2297,42 @@ label small {
 @media (prefers-reduced-motion: reduce) {
   .public-site .section.is-visible {
     animation: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .public-site .brand-logo-link {
+    gap: 7px;
+  }
+  .public-site .brand-logo-link > img {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+  }
+  .public-site .brand-logo-copy strong {
+    font-size: 17px;
+  }
+  .public-site .brand-logo-copy small {
+    display: none;
+  }
+  .public-site .hero-brand-logo {
+    width: min(100%, 360px);
+    padding: 12px;
+    border-radius: 26px;
+  }
+  .public-site .footer-brand-logo img {
+    width: 120px;
+  }
+}
+@media (max-width: 390px) {
+  .public-site .brand-logo-copy strong {
+    font-size: 15px;
+  }
+  .public-site .brand-logo-link > img {
+    width: 38px;
+    height: 38px;
+  }
+  .public-site .header-book {
+    padding-inline: 10px;
   }
 }
