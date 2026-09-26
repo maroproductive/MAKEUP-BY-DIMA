@@ -48,13 +48,15 @@ type Props = {
 function Booking({
   number,
   name,
+  price,
   light = false,
 }: {
   number: string;
   name?: string;
+  price?: number | string;
   light?: boolean;
 }) {
-  const href = whatsappLink(number, name);
+  const href = whatsappLink(number, name, price);
   return href ? (
     <a
       className={`button ${light ? "button-light" : ""}`}
@@ -336,6 +338,7 @@ export function PublicSite({
                   <Booking
                     number={s.whatsapp}
                     name={String(p.name)}
+                    price={p.price}
                     light={i === 3}
                   />
                 </article>
@@ -586,7 +589,11 @@ export function PublicSite({
                 ))}
               </ul>
             )}
-            <Booking number={s.whatsapp} name={String(selected.name)} />
+            <Booking
+              number={s.whatsapp}
+              name={String(selected.name)}
+              price={selected.price}
+            />
           </>
         )}
       </dialog>
