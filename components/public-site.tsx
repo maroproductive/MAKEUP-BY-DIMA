@@ -19,6 +19,7 @@ import {
   type ContentItem,
   type Settings,
 } from "@/lib/validation";
+import { localized, localizedList, ui, type Lang } from "@/lib/i18n";
 
 function Instagram({ size = 24 }: { size?: number }) {
   return (
@@ -49,14 +50,17 @@ function Booking({
   number,
   name,
   price,
+  language = "en",
   light = false,
 }: {
   number: string;
   name?: string;
   price?: number | string;
+  language?: Lang;
   light?: boolean;
 }) {
-  const href = whatsappLink(number, name, price);
+  const href = whatsappLink(number, name, price, language);
+  const t = ui[language];
   return href ? (
     <a
       className={`button ${light ? "button-light" : ""}`}
@@ -64,15 +68,15 @@ function Booking({
       target="_blank"
       rel="noopener noreferrer"
     >
-      {name ? "Book This Look" : "Book on WhatsApp"} <ArrowUpRight size={17} />
+      {name ? t.bookThisLook : t.bookWhatsapp} <ArrowUpRight size={17} />
     </a>
   ) : (
     <a className="button button-inquiry" href="#contact">
-      Enquire about your look <ArrowUpRight size={17} />
+      {t.inquiry} <ArrowUpRight size={17} />
     </a>
   );
 }
-function Comparison({ item }: { item: ContentItem }) {
+function Comparison({ item, lang }: { item: ContentItem; lang: Lang }) {
   const [position, setPosition] = useState(50);
   return (
     <article>
@@ -94,8 +98,8 @@ function Comparison({ item }: { item: ContentItem }) {
             sizes="(max-width: 700px) 100vw, 50vw"
           />
         </div>
-        <span className="compare-label left">BEFORE</span>
-        <span className="compare-label right">AFTER</span>
+        <span className="compare-label left">{ui[lang].before}</span>
+        <span className="compare-label right">{ui[lang].after}</span>
         <div className="compare-line" style={{ left: `${position}%` }}>
           <span>↔</span>
         </div>
@@ -108,8 +112,8 @@ function Comparison({ item }: { item: ContentItem }) {
           onChange={(e) => setPosition(Number(e.target.value))}
         />
       </div>
-      <h3>{item.title}</h3>
-      <p>{item.description}</p>
+      <h3>{localized(item, "title", lang)}</h3>
+      <p>{localized(item, "description", lang)}</p>
     </article>
   );
 }
