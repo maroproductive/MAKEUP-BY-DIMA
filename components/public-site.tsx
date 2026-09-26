@@ -260,21 +260,6 @@ export function PublicSite({
               <span>YOUR FEATURES. YOUR STYLE. YOUR MOMENT.</span>
             </div>
           </div>
-          <div className="brand-composition" aria-label={s.businessName}>
-            <div className="hero-brand-logo">
-              <Image
-                src="/makeup-by-dima-logo.svg"
-                alt={`${s.businessName} logo`}
-                width={280}
-                height={265}
-                priority
-                unoptimized
-              />
-            </div>
-            <span className="composition-note">
-              A little artistry. All you.
-            </span>
-          </div>
         </section>
         <div className="signature-strip">
           <span>SOFT GLAM</span>
