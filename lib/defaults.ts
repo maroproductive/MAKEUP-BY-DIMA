@@ -6,8 +6,8 @@ export const defaultSettings: Settings = {
   heroDescription:
     "Soft glam, bridal looks, and timeless makeup tailored to you.",
   heroImage: "",
-  whatsapp: "",
-  instagramUrl: "",
+  whatsapp: "+96171074682",
+  instagramUrl: "https://www.instagram.com/makeupbyydima?stkn=MXRpZnlzZHNxNXp6eQ==",
   mapsUrl: "",
   footerUrl: "",
 };
