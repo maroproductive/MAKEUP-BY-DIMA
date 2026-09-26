@@ -158,9 +158,19 @@ export function PublicSite({
   return (
     <div className="public-site">
       <header className="site-header">
-        <a className="wordmark" href="#" aria-label={`${s.businessName} home`}>
-          <span>{s.businessName}</span>
-          <small>MAKEUP ARTISTRY</small>
+        <a className="brand-logo-link" href="#" aria-label={`${s.businessName} home`}>
+          <Image
+            src="/makeup-by-dima-mark.svg"
+            alt=""
+            width={58}
+            height={59}
+            priority
+            unoptimized
+          />
+          <span className="brand-logo-copy">
+            <strong>{s.businessName}</strong>
+            <small>MAKEUP ARTISTRY</small>
+          </span>
         </a>
         <nav
           className={menu ? "navigation open" : "navigation"}
@@ -251,13 +261,15 @@ export function PublicSite({
             </div>
           </div>
           <div className="brand-composition" aria-label={s.businessName}>
-            <div className="brand-medallion">
-              <span className="brand-small">THE ART OF BEAUTY</span>
-              <span className="brand-initial">
-                D<span>.</span>
-              </span>
-              <span className="brand-name">{s.businessName}</span>
-              <span className="brand-small">BEAUTIFULLY YOU</span>
+            <div className="hero-brand-logo">
+              <Image
+                src="/makeup-by-dima-logo.svg"
+                alt={`${s.businessName} logo`}
+                width={520}
+                height={492}
+                priority
+                unoptimized
+              />
             </div>
             <span className="composition-note">
               A little artistry. All you.
@@ -527,9 +539,18 @@ export function PublicSite({
         </section>
       </main>
       <footer>
-        <a href="#" className="wordmark">
-          <span>{s.businessName}</span>
-          <small>BEAUTIFULLY YOU.</small>
+        <a
+          href="#"
+          className="footer-brand-logo"
+          aria-label={`${s.businessName} home`}
+        >
+          <Image
+            src="/makeup-by-dima-logo.svg"
+            alt={`${s.businessName} logo`}
+            width={130}
+            height={123}
+            unoptimized
+          />
         </a>
         <div className="footer-social">
           {social.map(({ label, url }) => (
