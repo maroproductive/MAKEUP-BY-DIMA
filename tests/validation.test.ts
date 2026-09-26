@@ -29,10 +29,10 @@ test("Reject unsafe links, unsupported images and invalid prices", () => {
 });
 test("WhatsApp uses configured international number and encodes package message", () => {
   assert.equal(whatsappLink(""), null);
-  const url = new URL(whatsappLink("+96112345678", "Bride & Glam")!);
+  const url = new URL(whatsappLink("+96112345678", "Bride & Glam", 80)!);
   assert.equal(url.hostname, "wa.me");
   assert.equal(url.pathname, "/96112345678");
-  assert.match(url.searchParams.get("text")!, /Bride & Glam package/);
+  assert.match(url.searchParams.get("text")!, /Bride & Glam package \(\$80\)/);
 });
 test("Required before/after images and active boolean are validated", () => {
   assert.equal(
