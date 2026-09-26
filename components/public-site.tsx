@@ -338,7 +338,7 @@ export function PublicSite({
                   <Booking
                     number={s.whatsapp}
                     name={String(p.name)}
-                    price={p.price}
+                    price={String(p.price)}
                     light={i === 3}
                   />
                 </article>
@@ -592,7 +592,7 @@ export function PublicSite({
             <Booking
               number={s.whatsapp}
               name={String(selected.name)}
-              price={selected.price}
+              price={String(selected.price)}
             />
           </>
         )}
