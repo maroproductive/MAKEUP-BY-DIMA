@@ -53,6 +53,7 @@ export const ui = {
     closePackage: "Close package details",
     closeImage: "Close image",
     inquiry: "Enquire about your look",
+    madeBy: "Made by",
   },
   ar: {
     makeupArtistry: "فن المكياج",
@@ -104,6 +105,7 @@ export const ui = {
     closePackage: "إغلاق تفاصيل الباقة",
     closeImage: "إغلاق الصورة",
     inquiry: "استفسري عن إطلالتكِ",
+    madeBy: "تصميم وتطوير",
   },
 } as const;
 
