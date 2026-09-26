@@ -104,10 +104,21 @@ export type ContentItem = {
   active: boolean;
   [key: string]: string | number | boolean | string[];
 };
-export function whatsappLink(number: string, name?: string, price?: number | string) {
+export function whatsappLink(
+  number: string,
+  name?: string,
+  price?: number | string,
+  language: "en" | "ar" = "en",
+) {
   if (!number) return null;
-  const packageMessage = name
-    ? `Hello, I’m interested in the ${name} package${price !== undefined && price !== "" ? ` (${price})` : ""}. I would like to know more and book an appointment.`
-    : "Hello, I would like to know more and book a makeup appointment.";
+  const hasPrice = price !== undefined && price !== "";
+  const packageMessage =
+    language === "ar"
+      ? name
+        ? `مرحباً ديما، أنا مهتمة بباقة ${name}${hasPrice ? ` بسعر $${price}` : ""} وأرغب بمعرفة المزيد وحجز موعد.`
+        : "مرحباً ديما، أرغب بمعرفة المزيد وحجز موعد مكياج."
+      : name
+        ? `Hello, I’m interested in the ${name} package${hasPrice ? ` ($${price})` : ""}. I would like to know more and book an appointment.`
+        : "Hello, I would like to know more and book a makeup appointment.";
   return `https://wa.me/${number.replace(/\D/g, "")}?text=${encodeURIComponent(packageMessage)}`;
 }
