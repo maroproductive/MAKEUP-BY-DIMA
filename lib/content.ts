@@ -31,12 +31,26 @@ export const getContent = cache(async function getContent() {
       ),
     ]);
     const clean = JSON.parse(JSON.stringify(lists)) as ContentItem[][];
+    const packages = clean[0].map((item) => {
+      const seeded = initialPackages.find((p) => p.name === item.name);
+      if (!seeded) return item;
+      return {
+        ...item,
+        nameAr: item.nameAr || seeded.nameAr,
+        descriptionAr: item.descriptionAr || seeded.descriptionAr,
+        detailsAr: item.detailsAr || seeded.detailsAr,
+        includedAr:
+          Array.isArray(item.includedAr) && item.includedAr.length
+            ? item.includedAr
+            : seeded.includedAr,
+      };
+    });
     return {
       settings: {
         ...defaultSettings,
         ...JSON.parse(JSON.stringify(settings || {})),
       } as Settings,
-      packages: clean[0],
+      packages,
       portfolio: clean[1],
       beforeAfter: clean[2],
       testimonials: clean[3],
